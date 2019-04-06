@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles  --silent",
+    "test": "jest --forceExit --detectOpenHandles",
     "start": "babel-node server.js",
     "debug": "nodemon --exec npm start"
   },
@@ -34,6 +34,7 @@
   },
   "jest": {
     "verbose": true,
+    "bail": false,
     "testURL": "http://localhost/",
     "testEnvironment": "node"
   }

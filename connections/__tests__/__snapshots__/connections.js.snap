@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test connections API GET /connections / should return a list of connections 1`] = `
+Object {
+  "mongo": Object {
+    "host": "localhost",
+    "password": "",
+    "port": 27107,
+    "type": "mongo",
+    "username": "root",
+  },
+  "mysql": Object {
+    "host": "localhost",
+    "password": "",
+    "port": 3306,
+    "type": "mysql",
+    "username": "root",
+  },
+  "newconn": Object {
+    "host": "localhost",
+    "password": "",
+    "port": 3306,
+    "type": "mysql",
+    "username": "root",
+  },
+}
+`;
