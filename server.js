@@ -1,14 +1,19 @@
 import express from 'express';
 import { MySql } from './lib';
 import { router as connectionsRouter } from './connections';
+import morgan from 'morgan';
 const app = express();
-console.log('in server.js', connectionsRouter);
 
 // mw
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('combined'));
+app.use((req, res, next) => {
+  console.log(req.body);
+  next();
+});
 
-// outes
+// routes
 app.use('/connections', connectionsRouter);
 
 app.get('/', async (req, res) => {
