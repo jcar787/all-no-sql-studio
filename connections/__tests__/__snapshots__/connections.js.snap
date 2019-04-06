@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test connections API GET /connections / should return a list of connections 1`] = `
+exports[`Test connections API GET /connections /connections should return a list of connections 1`] = `
 Object {
   "mongo": Object {
     "host": "localhost",
