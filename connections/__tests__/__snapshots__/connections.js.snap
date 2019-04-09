@@ -35,3 +35,13 @@ Object {
   "username": "root",
 }
 `;
+
+exports[`Test connections API POST /connections /connections/:name should return created connection 1`] = `
+Object {
+  "host": "localhost",
+  "password": "",
+  "port": 8888,
+  "type": "mongo",
+  "username": "root",
+}
+`;

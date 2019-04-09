@@ -2,6 +2,16 @@ import request from 'supertest';
 import { app } from '../../app';
 
 describe('Test connections API', () => {
+  let testConnection = {
+    connection: {
+      name: 'connection',
+      type: 'mongo',
+      host: 'localhost',
+      username: 'root',
+      password: '',
+      port: 8888
+    }
+  };
   describe('GET /connections', () => {
     test('/connections should return a list of connections', async () => {
       const response = await request(app).get('/connections');
@@ -22,11 +32,27 @@ describe('Test connections API', () => {
     });
   });
 
-  //   describe('POST /connections', () => {
-  //     test('/connections should create a new connection');
-  //     test('/connections should throw an error connection exists');
-  //     test('/connections/:name should return created connection');
-  //   });
+  describe('POST /connections', () => {
+    test('/connections should create a new connection', async () => {
+      const response = await request(app)
+        .post('/connections')
+        .send(testConnection);
+      expect(response.statusCode).toBe(204);
+    });
+    test('/connections should throw an error connection exists', async () => {
+      const response = await request(app)
+        .post('/connections')
+        .send(testConnection);
+      expect(response.statusCode).toBe(500);
+    });
+    test('/connections/:name should return created connection', async () => {
+      const response = await request(app).get(
+        `/connections/${testConnection.connection.name}`
+      );
+      expect(response.statusCode).toBe(200);
+      expect(response.body.connection).toMatchSnapshot();
+    });
+  });
 
   //   describe('PUT /connections/:name', () => {
   //     test('/connections/:name should update a connection');
