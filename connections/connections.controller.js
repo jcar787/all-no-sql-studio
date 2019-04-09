@@ -92,4 +92,19 @@ export const updateConnection = async (req, res) => {
     res.status(500).json({ message: 'Unexpected error happened' });
   }
 };
-export const deleteConnection = async (req, res) => {};
+export const deleteConnection = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const connections = await getConnections();
+    if (name in connections) {
+      delete connections[name];
+      await saveConnections(connections);
+      return res.status(204).end();
+    } else {
+      res.status(404).json({ message: `Connection ${name} doesn't exist` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Unexpected error happened' });
+  }
+};

@@ -1,5 +1,6 @@
 import request from 'supertest';
 import { app } from '../../app';
+import { merge } from 'lodash';
 
 describe('Test connections API', () => {
   let testConnection = {
@@ -37,13 +38,14 @@ describe('Test connections API', () => {
     test('/connections should create a new connection', async () => {
       const response = await request(app)
         .post('/connections')
-        .send({ ...testConnection, connection: { name } });
+        .send(merge(testConnection, { connection: { name } }));
       expect(response.statusCode).toBe(204);
     });
     test('/connections should throw an error connection exists', async () => {
+      console.log(merge(testConnection, { connection: { name } }));
       const response = await request(app)
         .post('/connections')
-        .send({ ...testConnection, connection: { name } });
+        .send(merge(testConnection, { connection: { name } }));
       expect(response.statusCode).toBe(500);
     });
     test('/connections/:name should return created connection', async () => {
@@ -56,6 +58,7 @@ describe('Test connections API', () => {
   describe('PUT /connections/:name', () => {
     test('/connections/:name should update a connection', async () => {
       testConnection.connection.port = 27017;
+      delete testConnection.connection.name;
       const response = await request(app)
         .put(`/connections/${name}`)
         .send(testConnection);
@@ -74,8 +77,14 @@ describe('Test connections API', () => {
     });
   });
 
-  //   describe('DELETE /connections/:name', () => {
-  //     test('/connections/:name should delete a connection');
-  //     test('/connections/:name should return 404');
-  //   });
+  describe('DELETE /connections/:name', () => {
+    test('/connections/:name should delete a connection', async () => {
+      const response = await request(app).delete(`/connections/${name}`);
+      expect(response.statusCode).toBe(204);
+    });
+    test('/connections/:name should return 404', async () => {
+      const response = await request(app).delete(`/connections/dontexist`);
+      expect(response.statusCode).toBe(404);
+    });
+  });
 });
