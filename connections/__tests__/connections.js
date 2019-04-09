@@ -9,10 +9,17 @@ describe('Test connections API', () => {
       expect(response.body).toMatchSnapshot();
     });
 
-    // describe('GET /connections/:name', () => {
-    //   test('/connections/mysql should return one connection');
-    //   test('/connections/dontexist should return 404');
-    // });
+    describe('GET /connections/:name', () => {
+      test('/connections/mysql should return one connection', async () => {
+        const response = await request(app).get('/connections/mysql');
+        expect(response.statusCode).toBe(200);
+        expect(response.body.connection).toMatchSnapshot();
+      });
+      test('/connections/dontexist should return 404', async () => {
+        const response = await request(app).get('/connections/dontexist');
+        expect(response.statusCode).toBe(404);
+      });
+    });
   });
 
   //   describe('POST /connections', () => {

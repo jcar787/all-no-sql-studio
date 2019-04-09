@@ -25,3 +25,13 @@ Object {
   },
 }
 `;
+
+exports[`Test connections API GET /connections GET /connections/:name /connections/mysql should return one connection 1`] = `
+Object {
+  "host": "localhost",
+  "password": "",
+  "port": 3306,
+  "type": "mysql",
+  "username": "root",
+}
+`;

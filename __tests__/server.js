@@ -8,18 +8,14 @@ describe('Test main routes', () => {
 
   describe('GET /', () => {
     test('/ should return 200', async () => {
-      const response = await request(app)
-        .get('/')
-        .end();
+      const response = await request(app).get('/');
       expect(response.statusCode).toBe(200);
     });
   });
 
   describe('GET wrong route', () => {
     test('/doesnotexist should return 404', async () => {
-      const response = await request(app)
-        .get('/doesnotexist')
-        .end();
+      const response = await request(app).get('/doesnotexist');
       expect(response.statusCode).toBe(404);
     });
   });
