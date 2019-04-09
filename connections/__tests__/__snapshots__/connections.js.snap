@@ -36,11 +36,13 @@ Object {
 }
 `;
 
-exports[`Test connections API POST /connections /connections/:name should return created connection 1`] = `
+exports[`Test connections API POST /connections /connections/:name should return created connection 1`] = `Object {}`;
+
+exports[`Test connections API PUT /connections/:name /connections/:name should return the updated connection  1`] = `
 Object {
   "host": "localhost",
   "password": "",
-  "port": 8888,
+  "port": 27017,
   "type": "mongo",
   "username": "root",
 }
