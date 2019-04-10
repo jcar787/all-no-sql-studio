@@ -15,12 +15,11 @@ router
   .get(getConnection)
   .post(createNewConnection);
 
+router.post('/activate', setActiveConnection);
 router
   .route('/:name')
   .get(getOneConnection)
   .put(updateConnection)
   .delete(deleteConnection);
-
-router.post('/activate', setActiveConnection);
 
 export default router;

@@ -1,7 +1,7 @@
 import { assign } from 'lodash';
 import { getClass, getConnections, saveConnections } from './connection.utils';
 
-export let connections = {};
+let connections = {};
 export const activeConnections = {};
 
 export const getConnection = async (req, res) => {
@@ -16,20 +16,21 @@ export const getConnection = async (req, res) => {
 
 export const setActiveConnection = async (req, res) => {
   try {
-    const { connection } = req.body;
-    if (connection in activeConnections) {
-      await activeConnections[connection].connect();
+    const { name } = req.body;
+    const connections = await getConnections();
+    if (name in activeConnections) {
+      await activeConnections[name].connect();
       res.status(204).end();
-    } else if (connection in connections) {
-      const { host, username, password, port } = connections[connection];
-      const DBClass = getClass(connection);
-      activeConnections[connection] = new DBClass({
+    } else if (name in connections) {
+      const { host, username, password, port } = connections[name];
+      const DBClass = getClass(name);
+      activeConnections[name] = new DBClass({
         host,
         username,
         password,
         port
       });
-      await activeConnections[connection].connect();
+      await activeConnections[name].connect();
       res.status(204).end();
     } else {
       res.status(404).json({ message: 'No connection exist' });

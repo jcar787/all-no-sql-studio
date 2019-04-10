@@ -1,2 +1,4 @@
 import router from './connections.route';
-export { router };
+import { activeConnections } from './connections.controller';
+import { getClass } from './connection.utils';
+export { router, activeConnections, getClass };

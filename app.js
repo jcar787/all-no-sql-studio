@@ -1,6 +1,7 @@
 import express from 'express';
 import { MySql } from './lib';
 import { router as connectionsRouter } from './connections';
+import { router as databasesRouter } from './databases';
 import morgan from 'morgan';
 
 export const app = express();
@@ -18,22 +19,12 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/connections', connectionsRouter);
+app.use('/databases', databasesRouter);
 
 app.get('/', async (req, res) => {
   res.send("It's working");
 });
 
-app.get('/databases', async (req, res) => {
-  try {
-    const mysql = new MySql();
-    await mysql.connect();
-    const databases = await mysql.getDatabases();
-    res.send(databases);
-  } catch (error) {
-    res.send(error.message);
-  }
-});
-
-app.use((req, res, next) => {
+app.use((req, res) => {
   return res.status(404).end();
 });
