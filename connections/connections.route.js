@@ -16,6 +16,7 @@ router
   .post(createNewConnection);
 
 router.post('/activate', setActiveConnection);
+
 router
   .route('/:name')
   .get(getOneConnection)
