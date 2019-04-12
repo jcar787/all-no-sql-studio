@@ -42,7 +42,6 @@ describe('Test connections API', () => {
       expect(response.statusCode).toBe(204);
     });
     test('/connections should throw an error connection exists', async () => {
-      console.log(merge(testConnection, { connection: { name } }));
       const response = await request(app)
         .post('/connections')
         .send(merge(testConnection, { connection: { name } }));

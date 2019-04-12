@@ -8,7 +8,6 @@ export const getClass = key => {
 };
 
 export const getConnections = () => {
-  console.log(__dirname);
   return new Promise((resolve, reject) => {
     readFile('./saved-connections.json', (err, data) => {
       if (err) {
