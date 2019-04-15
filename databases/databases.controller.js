@@ -94,3 +94,21 @@ export const deleteDatabase = async (req, res) => {
     return res.status(500).json({ message: 'Something unexpected happened' });
   }
 };
+
+export const createTable = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const { name: tableName, columns } = req.body;
+    const tableCreated = await activeConnections[name].createTable(
+      tableName,
+      columns
+    );
+    if (tableCreated) {
+      return res.status(204).end();
+    }
+    return res.status(500).json({ message: 'Table created' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Something unexpected happened' });
+  }
+};

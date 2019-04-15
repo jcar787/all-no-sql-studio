@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import {
   createNewDatabase,
+  createTable,
   deleteDatabase,
   getDatabases,
   getTables,
+  queryDatabase,
   showFields,
-  useDatabase,
-  queryDatabase
+  useDatabase
 } from './databases.controller';
 
 const router = Router();
@@ -18,7 +19,10 @@ router
   .post(createNewDatabase)
   .delete(deleteDatabase);
 
-router.route('/:name/table').get(getTables);
+router
+  .route('/:name/table')
+  .get(getTables)
+  .post(createTable);
 
 router.route('/:name/:table/fields').get(showFields);
 

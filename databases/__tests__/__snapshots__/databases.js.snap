@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test databases API GET /databases/:name/:table/fields to get all columns it should get fields 1`] = `
+Array [
+  Object {
+    "default": null,
+    "extra": "auto_increment",
+    "field": "id",
+    "key": "PRI",
+    "null": "NO",
+    "type": "int(11)",
+  },
+  Object {
+    "default": null,
+    "extra": "",
+    "field": "name",
+    "key": "",
+    "null": "NO",
+    "type": "varchar(255)",
+  },
+]
+`;
+
+exports[`Test databases API POST /databases/:name/q to make a query it should return created record 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "Testing",
+  },
+]
+`;
