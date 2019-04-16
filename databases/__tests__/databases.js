@@ -3,7 +3,7 @@ import { app } from '../../app';
 
 describe('Test databases API', () => {
   const connection = 'mysql';
-  const database = `testing_${Math.floor(Math.random() * 100)}`;
+  const database = `testing_777`;
   const table = {
     name: `my_table_${Math.floor(Math.random() * 100)}`,
     columns: {
